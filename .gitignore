@@ -1,0 +1,15 @@
+*/**/__pycache__
+.venv/
+.vscode/
+build/
+sim_build/
+test/logs/*
+!.gitkeep
+gds/**/*.gltf
+
+.DS_Store
+results.xml
+
+# Optional local tools (e.g. sv2v binary); keep tools/bin/.gitkeep in git.
+tools/bin/*
+!tools/bin/.gitkeep
