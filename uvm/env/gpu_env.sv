@@ -24,7 +24,7 @@ class gpu_env extends uvm_env;
         data_mem_agent.monitor.ap.connect(scoreboard.data_mem_export);
         
         // Предзагрузка через драйверы тоже должна попадать в Scoreboard
-        prog_mem_agent.driver.ap.connect(scoreboard.data_mem_export);
+        prog_mem_agent.driver.ap.connect(scoreboard.prog_mem_export);
         data_mem_agent.driver.ap.connect(scoreboard.data_mem_export);
     endfunction
 endclass

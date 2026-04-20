@@ -1,13 +1,16 @@
 `uvm_analysis_imp_decl(_host)
 `uvm_analysis_imp_decl(_data_mem)
+`uvm_analysis_imp_decl(_prog_mem)
 
 class gpu_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(gpu_scoreboard)
 
     uvm_analysis_imp_host     #(host_ctrl_item, gpu_scoreboard) host_export;
     uvm_analysis_imp_data_mem #(memory_item,    gpu_scoreboard) data_mem_export;
+    uvm_analysis_imp_prog_mem #(memory_item,    gpu_scoreboard) prog_mem_export;
 
-    logic [7:0] shadow_ram [255:0];
+    logic [7:0]  shadow_ram [255:0];
+    logic [15:0] prog_ram   [255:0];
     int thread_count = 0;
 
     function new(string name, uvm_component parent);
@@ -18,7 +21,11 @@ class gpu_scoreboard extends uvm_scoreboard;
         super.build_phase(phase);
         host_export     = new("host_export", this);
         data_mem_export = new("data_mem_export", this);
-        for (int i=0; i<256; i++) shadow_ram[i] = 0;
+        prog_mem_export = new("prog_mem_export", this);
+        for (int i=0; i<256; i++) begin
+            shadow_ram[i] = 0;
+            prog_ram[i] = 0;
+        end
     endfunction
 
     virtual function void write_host(host_ctrl_item item);
@@ -27,9 +34,15 @@ class gpu_scoreboard extends uvm_scoreboard;
         end
     endfunction
 
+    virtual function void write_prog_mem(memory_item item);
+        if (item.op == memory_item::WRITE) begin
+            prog_ram[item.addr] = item.data;
+        end
+    endfunction
+
     virtual function void write_data_mem(memory_item item);
         if (item.op == memory_item::WRITE) begin
-            if (item.addr >= 16 && item.addr < 16 + thread_count) begin
+            if (thread_count > 0 && item.addr >= 16 && item.addr < 16 + thread_count) begin
                 int idx = item.addr - 16;
                 logic [7:0] expected = shadow_ram[idx] + shadow_ram[idx + 8];
                 
