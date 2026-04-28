@@ -4,7 +4,11 @@ A minimal GPU implementation in Verilog optimized for learning about how GPUs wo
 
 Built with <15 files of fully documented Verilog, complete documentation on architecture & ISA, working matrix addition/multiplication kernels, and full support for kernel simulation & execution traces.
 
-**This fork:** extends the original [adam-maj/tiny-gpu](https://github.com/adam-maj/tiny-gpu). **UVM verification has been started** here (first testbench under `uvm/`, Vivado XSIM flow — work in progress). See [UVM (Vivado XSIM)](#uvm-vivado-xsim).
+**This fork:** extends the original [adam-maj/tiny-gpu](https://github.com/adam-maj/tiny-gpu) by introducing a **complete UVM (Universal Verification Methodology) Testbench**. 
+
+ 
+
+Jump to [UVM (Vivado XSIM)](#uvm-vivado-xsim) to run the testbench, or read the [Verification Results & Bug Report](#uvm-verification-results--bug-report) below to see what we found!
 
 ### Table of Contents
 
@@ -22,6 +26,7 @@ Built with <15 files of fully documented Verilog, complete documentation on arch
   - [Matrix Multiplication](/tree/master?tab=readme-ov-file#matrix-multiplication)
 - [Simulation](#simulation)
 - [UVM (Vivado XSIM)](#uvm-vivado-xsim)
+- [UVM Verification Results & Bug Report](#uvm-verification-results--bug-report)
 - [Advanced Functionality](#advanced-functionality)
 - [Next Steps](#next-steps)
 
@@ -358,6 +363,34 @@ UVM_VIVADO_COMPILE_ONLY=1 ./scripts/uvm_vivado_xsim.sh
 ```
 
 There is also `scripts/uvm_questa.sh` for Questa/Quartus-style setups; it is **not** validated for this first UVM release.
+
+## UVM Verification Results & Bug Report
+
+> **Note:** This GPU implementation does not have a strict specification. However, during the development and execution of the UVM testbench, several architectural flaws and logical bugs were discovered that lead to device hangs or incorrect instruction execution under certain edge cases.
+
+### Verification Plan
+The UVM testbench implements the following verification features:
+1. **Constrained Random Verification:** Stress-testing with dynamically changing thread counts on the fly.
+2. **On-the-fly Reset:** Verifying the correctness of hardware resets at random times (between kernel iterations) without interrupting the UVM simulation.
+3. **Reference Model:** A fully functional transaction-level model (`gpu_ref.sv`) that predicts the cycle-by-cycle behavior of the ALU, dispatcher, scheduler, and registers.
+4. **Scoreboard & Deadlock Watchdog:** Dynamically compares memory writes (STR) between the DUT and the Reference Model, and implements a watchdog timeout to elegantly catch RTL hangs without crashing the simulator.
+
+### Discovered Hardware Bugs
+
+#### 1. Partial Blocks Deadlock (Scheduler Hang)
+**File:** `src/scheduler.sv`  
+**Description:** The scheduler is hardcoded to take the `next_pc` from the *last* thread in the block, regardless of whether that thread is active or not. If the total number of threads is not a multiple of the block size (4), the last core receives a partial block. The inactive thread in such a block always outputs `next_pc = 0`. As a result, the core is forced to jump to address 0, enters an infinite loop, and never asserts the `done` signal.  
+**Potential Fix:** Take the `next_pc` value from the 0-th thread in the block (`current_pc <= next_pc[0]`), as it is guaranteed to be active for any block size.
+
+#### 2. Broken Negative Flag in ALU (Unsigned Comparison Bug)
+**File:** `src/alu.sv`  
+**Description:** When executing the `CMP` instruction, the Negative flag is calculated as `(rs - rt < 0)`. Because the `rs` and `rt` variables are declared without the `signed` specifier, the Verilog standard evaluates the expression as unsigned. In unsigned arithmetic, the subtraction result can never be less than zero, so the `N` flag is hardware-locked to `0`. The conditional branch `BRn` (Branch if Negative) will never be taken.  
+**Potential Fix:** Explicitly cast the operands to a signed type: `($signed(rs) - $signed(rt) < 0)`.
+
+#### 3. Sticky `done` Signal (Start/Done Synchronization)
+**File:** `src/dispatch.sv`  
+**Description:** The dispatcher asserts `done <= 1` when `blocks_done == total_blocks`. However, there is no mechanism to automatically clear this signal when starting a new kernel. If a second run is started immediately after the first completes (by raising `start`), the `done` signal remains `1`. The host processor will incorrectly assume the second kernel completed instantly.  
+**Potential Fix:** Add `done <= 0` inside the `if (!start_execution)` block.
 
 # Advanced Functionality
 
