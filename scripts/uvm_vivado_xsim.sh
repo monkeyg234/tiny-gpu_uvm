@@ -48,6 +48,9 @@ fi
 
 XV_I=(
   -i "$ROOT/src"
+  -i "$ROOT/uvm/agents/clk_agent"
+  -i "$ROOT/uvm/agents/rst_agent"
+  -i "$ROOT/uvm/agents/done_agent"
   -i "$ROOT/uvm/agents/memory_agent"
   -i "$ROOT/uvm/agents/host_ctrl_agent"
   -i "$ROOT/uvm/env"
@@ -73,8 +76,14 @@ xvlog "$ROOT/build/gpu.v"
 
 echo "[uvm_vivado_xsim] xvlog testbench (SystemVerilog + UVM)..."
 xvlog --sv -relax -L uvm "${XV_I[@]}" \
+  "$ROOT/uvm/agents/clk_agent/clk_agent_if.sv" \
+  "$ROOT/uvm/agents/rst_agent/rst_agent_if.sv" \
+  "$ROOT/uvm/agents/done_agent/done_agent_if.sv" \
   "$ROOT/uvm/agents/memory_agent/memory_if.sv" \
   "$ROOT/uvm/agents/host_ctrl_agent/host_ctrl_if.sv" \
+  "$ROOT/uvm/agents/clk_agent/clk_pkg.sv" \
+  "$ROOT/uvm/agents/rst_agent/rst_pkg.sv" \
+  "$ROOT/uvm/agents/done_agent/done_pkg.sv" \
   "$ROOT/uvm/agents/host_ctrl_agent/host_ctrl_pkg.sv" \
   "$ROOT/uvm/agents/memory_agent/memory_pkg.sv" \
   "$ROOT/uvm/scoreboard/gpu_scoreboard_pkg.sv" \

@@ -28,7 +28,6 @@ class host_ctrl_driver extends uvm_driver #(host_ctrl_item);
         end else begin
             vif.cb.start <= 1;
             @(vif.cb);
-            vif.cb.start <= 0;
         end
     endtask
 endclass

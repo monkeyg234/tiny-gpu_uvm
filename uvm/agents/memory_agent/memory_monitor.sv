@@ -15,23 +15,21 @@ class memory_monitor #(
 
     virtual task run_phase(uvm_phase phase);
         forever begin
-            // Use interface nets, not clocking outputs (read_ready/read_data/write_ready), for
-            // monitors — matches LRM-strict tools (e.g. Vivado xsim).
             @(posedge vif.clk);
             for (int i = 0; i < NUM_CHANNELS; i++) begin
                 if (vif.read_valid[i] && vif.read_ready[i]) begin
                     memory_item item = memory_item::type_id::create("item");
                     item.op = memory_item::READ;
-                    item.addr = vif.read_address[i];
-                    item.data = vif.read_data[i];
+                    item.addr = vif.read_address[i*ADDR_BITS +: ADDR_BITS];
+                    item.data = vif.read_data[i*DATA_BITS +: DATA_BITS];
                     item.channel = i;
                     ap.write(item);
                 end
                 if (vif.write_valid[i] && vif.write_ready[i]) begin
                     memory_item item = memory_item::type_id::create("item");
                     item.op = memory_item::WRITE;
-                    item.addr = vif.write_address[i];
-                    item.data = vif.write_data[i];
+                    item.addr = vif.write_address[i*ADDR_BITS +: ADDR_BITS];
+                    item.data = vif.write_data[i*DATA_BITS +: DATA_BITS];
                     item.channel = i;
                     ap.write(item);
                 end

@@ -24,22 +24,29 @@ class memory_driver #(
         fork
             // Процесс 1: Слушаем запросы от GPU (как реальная память)
             forever begin
+                logic [NUM_CHANNELS*DATA_BITS-1:0] next_read_data = 0;
+                logic [NUM_CHANNELS-1:0] next_read_ready = 0;
+                logic [NUM_CHANNELS-1:0] next_write_ready = 0;
+                
                 @(vif.cb);
                 for (int i = 0; i < NUM_CHANNELS; i++) begin
                     if (vif.cb.read_valid[i]) begin
-                        vif.cb.read_data[i] <= ram[vif.cb.read_address[i]];
-                        vif.cb.read_ready[i] <= 1;
+                        next_read_data[i*DATA_BITS +: DATA_BITS] = ram[vif.cb.read_address[i*ADDR_BITS +: ADDR_BITS]];
+                        next_read_ready[i] = 1;
                     end else begin
-                        vif.cb.read_ready[i] <= 0;
+                        next_read_ready[i] = 0;
                     end
 
                     if (vif.cb.write_valid[i]) begin
-                        ram[vif.cb.write_address[i]] = vif.cb.write_data[i];
-                        vif.cb.write_ready[i] <= 1;
+                        ram[vif.cb.write_address[i*ADDR_BITS +: ADDR_BITS]] = vif.cb.write_data[i*DATA_BITS +: DATA_BITS];
+                        next_write_ready[i] = 1;
                     end else begin
-                        vif.cb.write_ready[i] <= 0;
+                        next_write_ready[i] = 0;
                     end
                 end
+                vif.cb.read_data <= next_read_data;
+                vif.cb.read_ready <= next_read_ready;
+                vif.cb.write_ready <= next_write_ready;
             end
 
             // Процесс 2: Принимаем данные от теста (предзагрузка программы/данных)

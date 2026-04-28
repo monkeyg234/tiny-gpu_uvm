@@ -5,13 +5,13 @@ interface memory_if #(
 )(input logic clk, input logic reset);
 
     logic [NUM_CHANNELS-1:0] read_valid;
-    logic [ADDR_BITS-1:0]    read_address [NUM_CHANNELS-1:0];
+    logic [NUM_CHANNELS*ADDR_BITS-1:0] read_address;
     logic [NUM_CHANNELS-1:0] read_ready;
-    logic [DATA_BITS-1:0]    read_data [NUM_CHANNELS-1:0];
+    logic [NUM_CHANNELS*DATA_BITS-1:0] read_data;
 
     logic [NUM_CHANNELS-1:0] write_valid;
-    logic [ADDR_BITS-1:0]    write_address [NUM_CHANNELS-1:0];
-    logic [DATA_BITS-1:0]    write_data [NUM_CHANNELS-1:0];
+    logic [NUM_CHANNELS*ADDR_BITS-1:0] write_address;
+    logic [NUM_CHANNELS*DATA_BITS-1:0] write_data;
     logic [NUM_CHANNELS-1:0] write_ready;
 
     clocking cb @(posedge clk);

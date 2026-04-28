@@ -4,30 +4,34 @@ module gpu_tb_top;
     import uvm_pkg::*;
     `include "uvm_macros.svh"
     
+    import clk_pkg::*;
+    import rst_pkg::*;
+    import done_pkg::*;
     import host_ctrl_pkg::*;
     import memory_pkg::*;
     import gpu_env_pkg::*;
     import gpu_test_pkg::*;
 
-    logic clk;
-    logic reset;
+    // -------------------------------------------------------
+    // Clock & Reset — driven by UVM agents (not hardcoded)
+    // -------------------------------------------------------
+    clk_agent_if  clk_if();
+    rst_agent_if  rst_if(clk_if.clk);
 
-    initial begin
-        clk = 0;
-        forever #5ns clk = ~clk;
-    end
+    wire clk   = clk_if.clk;
+    wire reset = rst_if.reset;
 
-    initial begin
-        reset = 1;
-        #20ns reset = 0;
-    end
-
+    // -------------------------------------------------------
+    // DUT Interfaces
+    // -------------------------------------------------------
     host_ctrl_if h_if(clk, reset);
     memory_if #(8, 16, 1) p_if(clk, reset);
     memory_if #(8, 8, 4)  d_if(clk, reset);
+    done_agent_if done_if(clk);
 
-    // Flat buses match sv2v Verilog DUT (packed channel buses). Unpacked interface arrays
-    // are mapped explicitly so strict simulators (e.g. Vivado xsim) accept the connections.
+    // -------------------------------------------------------
+    // GPU DUT — parametric memory width
+    // -------------------------------------------------------
     localparam int PM_CH = 1;
     localparam int PM_AB = 8;
     localparam int PM_DB = 16;
@@ -78,27 +82,39 @@ module gpu_tb_top;
         .data_mem_write_ready(w_dm_wready)
     );
 
-    assign p_if.read_valid = w_pm_rvalid;
-    assign p_if.read_address[0] = w_pm_raddr;
-    assign w_pm_rready = p_if.read_ready;
-    assign w_pm_rdata = p_if.read_data[0];
+    // -------------------------------------------------------
+    // Done signal → done_if
+    // -------------------------------------------------------
+    assign done_if.done = h_if.done;
 
+    // -------------------------------------------------------
+    // Program Memory wiring
+    // -------------------------------------------------------
+    assign p_if.read_valid = w_pm_rvalid;
+    assign p_if.read_address = w_pm_raddr;
+    assign w_pm_rready = p_if.read_ready;
+    assign w_pm_rdata = p_if.read_data;
+
+    // -------------------------------------------------------
+    // Data Memory wiring
+    // -------------------------------------------------------
     assign d_if.read_valid = w_dm_rvalid;
-    assign d_if.write_valid = w_dm_wvalid;
+    assign d_if.read_address = w_dm_raddr;
     assign w_dm_rready = d_if.read_ready;
+    assign w_dm_rdata = d_if.read_data;
+
+    assign d_if.write_valid = w_dm_wvalid;
+    assign d_if.write_address = w_dm_waddr;
+    assign d_if.write_data = w_dm_wdata;
     assign w_dm_wready = d_if.write_ready;
 
-    genvar gi;
-    generate
-        for (gi = 0; gi < DM_CH; gi++) begin : g_dm_map
-            assign d_if.read_address[gi]  = w_dm_raddr[gi*DM_AB +: DM_AB];
-            assign d_if.write_address[gi] = w_dm_waddr[gi*DM_AB +: DM_AB];
-            assign d_if.write_data[gi]    = w_dm_wdata[gi*DM_DB +: DM_DB];
-            assign w_dm_rdata[gi*DM_DB +: DM_DB] = d_if.read_data[gi];
-        end
-    endgenerate
-
+    // -------------------------------------------------------
+    // UVM config_db — pass interfaces to agents
+    // -------------------------------------------------------
     initial begin
+        uvm_config_db#(virtual clk_agent_if)::set(null, "*", "clk_vif", clk_if);
+        uvm_config_db#(virtual rst_agent_if)::set(null, "*", "rst_vif", rst_if);
+        uvm_config_db#(virtual done_agent_if)::set(null, "*", "done_vif", done_if);
         uvm_config_db#(virtual host_ctrl_if)::set(null, "*", "h_vif", h_if);
         uvm_config_db#(virtual memory_if#(8,16,1))::set(null, "*", "p_vif", p_if);
         uvm_config_db#(virtual memory_if#(8,8,4))::set(null, "*", "d_vif", d_if);
