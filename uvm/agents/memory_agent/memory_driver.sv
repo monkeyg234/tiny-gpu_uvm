@@ -20,7 +20,6 @@ class memory_driver #(
         vif.cb.read_ready <= 0;
         vif.cb.write_ready <= 0;
 
-        // Запускаем два процесса параллельно
         fork
             // Процесс 1: Слушаем запросы от GPU (как реальная память)
             forever begin

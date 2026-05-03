@@ -1,5 +1,10 @@
 class memory_item extends uvm_sequence_item;
-    `uvm_object_utils(memory_item)
+    `uvm_object_utils_begin(memory_item)
+        `uvm_field_enum(op_e, op, UVM_ALL_ON)
+        `uvm_field_int(addr,     UVM_ALL_ON)
+        `uvm_field_int(data,     UVM_ALL_ON)
+        `uvm_field_int(channel,  UVM_ALL_ON)
+    `uvm_object_utils_end
 
     typedef enum {READ, WRITE} op_e;
 

@@ -1,59 +1,38 @@
-class gpu_matadd_seq extends uvm_sequence;
+// gpu_matadd_seq.sv — Последовательность для теста сложения матриц.
+// Наследует утилиты загрузки/запуска из gpu_base_vseq.
+class gpu_matadd_seq extends gpu_base_vseq;
     `uvm_object_utils(gpu_matadd_seq)
 
-    uvm_sequencer #(host_ctrl_item) host_seqr;
-    uvm_sequencer #(memory_item)    prog_seqr;
-    uvm_sequencer #(memory_item)    data_seqr;
+    rand int num_threads;
+
+    constraint c_threads {
+        soft num_threads == 8;  // По умолчанию 8 потоков для 2×2+2×2
+    }
 
     function new(string name = "gpu_matadd_seq");
         super.new(name);
     endfunction
 
     virtual task body();
-        host_ctrl_item h_item;
-        memory_item    m_item;
-
-        logic [15:0] prog_words [] = '{
-            16'h50DE, 16'h300F, 16'h9100, 16'h9208, 
-            16'h9310, 16'h3410, 16'h7440, 16'h3520, 
-            16'h7550, 16'h3645, 16'h3730, 16'h8076, 
+        // MatAdd kernel program
+        logic [15:0] prog[$] = '{
+            16'h50DE, 16'h300F, 16'h9100, 16'h9208,
+            16'h9310, 16'h3410, 16'h7440, 16'h3520,
+            16'h7550, 16'h3645, 16'h3730, 16'h8076,
             16'hF000
         };
 
-        foreach (prog_words[i]) begin
-            m_item = memory_item::type_id::create("m_item");
-            m_item.op = memory_item::WRITE;
-            m_item.addr = i;
-            m_item.data = prog_words[i];
-            start_item(m_item, .sequencer(prog_seqr));
-            finish_item(m_item);
+        // Данные: A[0..7] = {0,1,...,7}, B[8..15] = {0,1,...,7}
+        logic [7:0] data_a[$];
+        logic [7:0] data_b[$];
+        for (int i = 0; i < 8; i++) begin
+            data_a.push_back(i);
+            data_b.push_back(i);
         end
 
-        for (int i=0; i<8; i++) begin
-            m_item = memory_item::type_id::create("m_item");
-            m_item.op = memory_item::WRITE;
-            m_item.addr = i;
-            m_item.data = i;
-            start_item(m_item, .sequencer(data_seqr));
-            finish_item(m_item);
-            
-            m_item = memory_item::type_id::create("m_item");
-            m_item.op = memory_item::WRITE;
-            m_item.addr = i + 8;
-            m_item.data = i;
-            start_item(m_item, .sequencer(data_seqr));
-            finish_item(m_item);
-        end
-
-        h_item = host_ctrl_item::type_id::create("h_item");
-        h_item.is_write = 1;
-        h_item.data = 8;
-        start_item(h_item, .sequencer(host_seqr));
-        finish_item(h_item);
-
-        h_item = host_ctrl_item::type_id::create("h_item");
-        h_item.is_write = 0;
-        start_item(h_item, .sequencer(host_seqr));
-        finish_item(h_item);
+        load_program(prog);
+        load_data(0, data_a);
+        load_data(8, data_b);
+        launch_kernel(num_threads);
     endtask
 endclass

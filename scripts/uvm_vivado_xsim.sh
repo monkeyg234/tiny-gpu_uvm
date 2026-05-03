@@ -48,6 +48,7 @@ fi
 
 XV_I=(
   -i "$ROOT/src"
+  -i "$ROOT/uvm/common"
   -i "$ROOT/uvm/agents/clk_agent"
   -i "$ROOT/uvm/agents/rst_agent"
   -i "$ROOT/uvm/agents/done_agent"

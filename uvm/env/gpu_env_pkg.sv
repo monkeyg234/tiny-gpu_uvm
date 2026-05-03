@@ -9,5 +9,7 @@ package gpu_env_pkg;
     import memory_pkg::*;
     import gpu_scoreboard_pkg::*;
 
+    `include "gpu_env_cfg.sv"
+    `include "gpu_virtual_sequencer.sv"
     `include "gpu_env.sv"
 endpackage

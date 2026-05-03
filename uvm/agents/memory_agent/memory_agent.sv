@@ -16,12 +16,15 @@ class memory_agent #(
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         monitor = memory_monitor #(ADDR_BITS, DATA_BITS, NUM_CHANNELS)::type_id::create("monitor", this);
-        driver = memory_driver #(ADDR_BITS, DATA_BITS, NUM_CHANNELS)::type_id::create("driver", this);
-        sequencer = uvm_sequencer #(memory_item)::type_id::create("sequencer", this);
+        if (get_is_active() == UVM_ACTIVE) begin
+            driver = memory_driver #(ADDR_BITS, DATA_BITS, NUM_CHANNELS)::type_id::create("driver", this);
+            sequencer = uvm_sequencer #(memory_item)::type_id::create("sequencer", this);
+        end
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
-        driver.seq_item_port.connect(sequencer.seq_item_export);
+        if (get_is_active() == UVM_ACTIVE)
+            driver.seq_item_port.connect(sequencer.seq_item_export);
     endfunction
 endclass

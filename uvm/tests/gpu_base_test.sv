@@ -1,7 +1,8 @@
 class gpu_base_test extends uvm_test;
     `uvm_component_utils(gpu_base_test)
 
-    gpu_env env;
+    gpu_env     env;
+    gpu_env_cfg cfg;
 
     function new(string name = "gpu_base_test", uvm_component parent = null);
         super.new(name, parent);
@@ -9,7 +10,20 @@ class gpu_base_test extends uvm_test;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
+
+        // Create and configure env_cfg
+        cfg = gpu_env_cfg::type_id::create("cfg");
+        configure_env(cfg);  // Hook для подклассов
+
+        // Pass cfg to env via config_db
+        uvm_config_db#(gpu_env_cfg)::set(this, "env", "cfg", cfg);
+
         env = gpu_env::type_id::create("env", this);
+    endfunction
+
+    // Hook для подклассов: переопределите для изменения конфигурации
+    virtual function void configure_env(gpu_env_cfg cfg);
+        // Defaults — подклассы могут переопределить
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);

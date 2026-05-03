@@ -17,4 +17,7 @@ package gpu_scoreboard_pkg;
 
     // Scoreboard
     `include "gpu_scoreboard.sv"
+
+    // Coverage
+    `include "gpu_coverage.sv"
 endpackage

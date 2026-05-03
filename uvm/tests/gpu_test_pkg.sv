@@ -12,5 +12,7 @@ package gpu_test_pkg;
 
     `include "gpu_base_test.sv"
     `include "gpu_matadd_test.sv"
+    `include "gpu_matmul_test.sv"
+    `include "gpu_corner_test.sv"
     `include "gpu_stress_test.sv"
 endpackage

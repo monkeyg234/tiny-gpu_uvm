@@ -118,6 +118,23 @@ class gpu_scoreboard extends uvm_scoreboard;
     endfunction
 
     // -------------------------------------------------------
+    // Check phase — verify completeness of DUT writes
+    // -------------------------------------------------------
+    virtual function void check_phase(uvm_phase phase);
+        super.check_phase(phase);
+        if (kernel_started && ref_model.executed) begin
+            int expected_count = ref_model.expected_writes.size();
+            if (total_writes != expected_count)
+                `uvm_error("SCB", $sformatf(
+                    "Write count mismatch: DUT wrote %0d times, reference model expected %0d",
+                    total_writes, expected_count))
+            else
+                `uvm_info("SCB", $sformatf(
+                    "Write count OK: %0d writes as expected", total_writes), UVM_MEDIUM)
+        end
+    endfunction
+
+    // -------------------------------------------------------
     // Final report
     // -------------------------------------------------------
     virtual function void report_phase(uvm_phase phase);
@@ -126,6 +143,8 @@ class gpu_scoreboard extends uvm_scoreboard;
         `uvm_info("SCB", "        SCOREBOARD SUMMARY", UVM_LOW)
         `uvm_info("SCB", "============================================", UVM_LOW)
         `uvm_info("SCB", $sformatf("  Total DUT writes   : %0d", total_writes), UVM_LOW)
+        `uvm_info("SCB", $sformatf("  Expected writes    : %0d",
+            ref_model.executed ? ref_model.expected_writes.size() : -1), UVM_LOW)
         `uvm_info("SCB", $sformatf("  Matches            : %0d", match_count), UVM_LOW)
         `uvm_info("SCB", $sformatf("  Mismatches         : %0d", mismatch_count), UVM_LOW)
         `uvm_info("SCB", $sformatf("  Kernel completed   : %s", kernel_done ? "YES" : "NO"), UVM_LOW)
@@ -144,3 +163,4 @@ class gpu_scoreboard extends uvm_scoreboard;
     endfunction
 
 endclass
+

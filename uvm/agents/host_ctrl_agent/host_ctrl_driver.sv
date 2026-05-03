@@ -20,7 +20,10 @@ class host_ctrl_driver extends uvm_driver #(host_ctrl_item);
 
     virtual task drive_item(host_ctrl_item item);
         @(vif.cb);
-        if (item.is_write) begin
+        if (item.is_start_clear) begin
+            vif.cb.start <= 0;
+            `uvm_info("HOST_DRV", "Start signal deasserted", UVM_MEDIUM)
+        end else if (item.is_write) begin
             vif.cb.device_control_data <= item.data;
             vif.cb.device_control_write_enable <= 1;
             @(vif.cb);
