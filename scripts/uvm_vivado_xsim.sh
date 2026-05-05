@@ -95,7 +95,7 @@ xvlog --sv -relax -L uvm "${XV_I[@]}" \
 
 echo "[uvm_vivado_xsim] xelab top gpu_tb_top..."
 # xvlog uses library "work" by default (not xil_defaultlib).
-xelab -relax -L uvm work.gpu_tb_top -s "$SNAP"
+xelab -relax -L uvm work.gpu_tb_top -s "$SNAP" -cc_type sbct
 
 if [[ "${UVM_VIVADO_COMPILE_ONLY:-0}" == "1" ]]; then
   echo "[uvm_vivado_xsim] UVM_VIVADO_COMPILE_ONLY=1 — пропускаю xsim."
@@ -105,6 +105,6 @@ fi
 
 echo "[uvm_vivado_xsim] xsim (UVM_TESTNAME=$TESTNAME)..."
 # xsim does not accept bare +plusargs; use -testplusarg for UVM / $value$plusargs.
-xsim "$SNAP" -runall -testplusarg "UVM_TESTNAME=$TESTNAME"
+xsim "$SNAP" -runall -testplusarg "UVM_TESTNAME=$TESTNAME" -testplusarg "UVM_TIMEOUT=500000ns,YES"
 
 echo "[uvm_vivado_xsim] done."

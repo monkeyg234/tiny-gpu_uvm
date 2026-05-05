@@ -16,12 +16,11 @@ class memory_driver #(
 
     virtual task run_phase(uvm_phase phase);
         for (int i = 0; i < 2**ADDR_BITS; i++) ram[i] = 0;
-
         vif.cb.read_ready <= 0;
         vif.cb.write_ready <= 0;
 
         fork
-            // Процесс 1: Слушаем запросы от GPU (как реальная память)
+            // Process 1: Respond to GPU requests
             forever begin
                 logic [NUM_CHANNELS*DATA_BITS-1:0] next_read_data = 0;
                 logic [NUM_CHANNELS-1:0] next_read_ready = 0;
@@ -32,23 +31,17 @@ class memory_driver #(
                     if (vif.cb.read_valid[i]) begin
                         next_read_data[i*DATA_BITS +: DATA_BITS] = ram[vif.cb.read_address[i*ADDR_BITS +: ADDR_BITS]];
                         next_read_ready[i] = 1;
-                    end else begin
-                        next_read_ready[i] = 0;
                     end
-
                     if (vif.cb.write_valid[i]) begin
                         ram[vif.cb.write_address[i*ADDR_BITS +: ADDR_BITS]] = vif.cb.write_data[i*DATA_BITS +: DATA_BITS];
                         next_write_ready[i] = 1;
-                    end else begin
-                        next_write_ready[i] = 0;
                     end
                 end
                 vif.cb.read_data <= next_read_data;
                 vif.cb.read_ready <= next_read_ready;
                 vif.cb.write_ready <= next_write_ready;
             end
-
-            // Процесс 2: Принимаем данные от теста (предзагрузка программы/данных)
+            // Process 2: Preload from sequence
             forever begin
                 seq_item_port.get_next_item(req);
                 if (req.op == memory_item::WRITE) begin

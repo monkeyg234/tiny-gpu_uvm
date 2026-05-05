@@ -1,10 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
 
-// BLOCK DISPATCH
-// > The GPU has one dispatch unit at the top level
-// > Manages processing of threads and marks kernel execution as done
-// > Sends off batches of threads in blocks to be executed by available compute cores
 module dispatch #(
     parameter NUM_CORES = 2,
     parameter THREADS_PER_BLOCK = 4
@@ -13,80 +9,78 @@ module dispatch #(
     input wire reset,
     input wire start,
 
-    // Kernel Metadata
     input wire [7:0] thread_count,
 
-    // Core States
-    input reg [NUM_CORES-1:0] core_done,
+    input wire [NUM_CORES-1:0] core_done,
     output reg [NUM_CORES-1:0] core_start,
     output reg [NUM_CORES-1:0] core_reset,
     output reg [7:0] core_block_id [NUM_CORES-1:0],
     output reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_CORES-1:0],
 
-    // Kernel Execution
     output reg done
 );
-    // Calculate the total number of blocks based on total threads & threads per block
-    wire [7:0] total_blocks;
-    assign total_blocks = (thread_count + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+    reg [7:0] blocks_dispatched;
+    reg [7:0] blocks_done;
+    reg [7:0] total_blocks_reg;
+    reg start_execution;
 
-    // Keep track of how many blocks have been processed
-    reg [7:0] blocks_dispatched; // How many blocks have been sent to cores?
-    reg [7:0] blocks_done; // How many blocks have finished processing?
-    reg start_execution; // EDA: Unimportant hack used because of EDA tooling
+    // We use a temporary variable for the combinational logic of dispatching multiple blocks in one cycle
+    int next_blocks_dispatched;
 
-    always @(posedge clk) begin
+    always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
-            done <= 0;
-            blocks_dispatched = 0;
-            blocks_done = 0;
-            start_execution <= 0;
-
+            done              <= 0;
+            start_execution   <= 0;
+            blocks_dispatched <= 0;
+            blocks_done       <= 0;
+            total_blocks_reg  <= 0;
             for (int i = 0; i < NUM_CORES; i++) begin
-                core_start[i] <= 0;
                 core_reset[i] <= 1;
+                core_start[i] <= 0;
                 core_block_id[i] <= 0;
                 core_thread_count[i] <= THREADS_PER_BLOCK;
             end
-        end else if (start) begin    
-            // EDA: Indirect way to get @(posedge start) without driving from 2 different clocks
-            if (!start_execution) begin 
-                start_execution <= 1;
+        end else if (start) begin
+            if (!start_execution) begin
+                start_execution   <= 1;
+                done              <= 0;
+                blocks_dispatched <= 0;
+                blocks_done       <= 0;
+                total_blocks_reg  <= (thread_count + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
                 for (int i = 0; i < NUM_CORES; i++) begin
                     core_reset[i] <= 1;
+                    core_start[i] <= 0;
                 end
-            end
+            end else begin
+                if (total_blocks_reg > 0 && blocks_done == total_blocks_reg) begin
+                    done <= 1;
+                end
 
-            // If the last block has finished processing, mark this kernel as done executing
-            if (blocks_done == total_blocks) begin 
-                done <= 1;
-            end
+                next_blocks_dispatched = blocks_dispatched;
+                for (int i = 0; i < NUM_CORES; i++) begin
+                    if (core_reset[i]) begin
+                        if (next_blocks_dispatched < total_blocks_reg) begin
+                            core_reset[i] <= 0;
+                            core_start[i] <= 1;
+                            core_block_id[i] <= next_blocks_dispatched[7:0];
+                            core_thread_count[i] <= (next_blocks_dispatched[7:0] == total_blocks_reg - 1)
+                                ? (thread_count - (next_blocks_dispatched[7:0] * THREADS_PER_BLOCK))
+                                : THREADS_PER_BLOCK;
+                            next_blocks_dispatched = next_blocks_dispatched + 1;
+                        end
+                    end
 
-            for (int i = 0; i < NUM_CORES; i++) begin
-                if (core_reset[i]) begin 
-                    core_reset[i] <= 0;
-
-                    // If this core was just reset, check if there are more blocks to be dispatched
-                    if (blocks_dispatched < total_blocks) begin 
-                        core_start[i] <= 1;
-                        core_block_id[i] <= blocks_dispatched;
-                        core_thread_count[i] <= (blocks_dispatched == total_blocks - 1) 
-                            ? thread_count - (blocks_dispatched * THREADS_PER_BLOCK)
-                            : THREADS_PER_BLOCK;
-
-                        blocks_dispatched = blocks_dispatched + 1;
+                    if (core_start[i] && core_done[i]) begin
+                        core_reset[i] <= 1;
+                        core_start[i] <= 0;
+                        blocks_done   <= blocks_done + 1;
                     end
                 end
+                blocks_dispatched <= next_blocks_dispatched[7:0];
             end
-
-            for (int i = 0; i < NUM_CORES; i++) begin
-                if (core_start[i] && core_done[i]) begin
-                    // If a core just finished executing it's current block, reset it
-                    core_reset[i] <= 1;
-                    core_start[i] <= 0;
-                    blocks_done = blocks_done + 1;
-                end
-            end
+        end else begin
+            start_execution <= 0;
+            // done stays high until next start/reset
         end
     end
 endmodule

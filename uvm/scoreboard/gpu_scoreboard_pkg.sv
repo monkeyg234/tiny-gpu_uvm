@@ -5,6 +5,7 @@ package gpu_scoreboard_pkg;
     import host_ctrl_pkg::*;
     import memory_pkg::*;
     import done_pkg::*;
+    import rst_pkg::*;
 
     // Reference model modules (order matters — dependencies first)
     `include "ref_model/alu_ref.sv"

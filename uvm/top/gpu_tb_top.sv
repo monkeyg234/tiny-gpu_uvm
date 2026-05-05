@@ -27,7 +27,7 @@ module gpu_tb_top;
     host_ctrl_if h_if(clk, reset);
     memory_if #(8, 16, 1) p_if(clk, reset);
     memory_if #(8, 8, 4)  d_if(clk, reset);
-    done_agent_if done_if(clk);
+    done_agent_if done_if(clk, reset);
 
     // -------------------------------------------------------
     // GPU DUT — parametric memory width

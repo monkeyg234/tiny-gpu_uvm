@@ -1,0 +1,398 @@
+[uvm_vivado_xsim] sourcing /home/daniel/Vivado/2025.1/Vivado/settings64.sh
+[uvm_vivado_xsim] ROOT=/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu
+[uvm_vivado_xsim] TESTNAME=gpu_stress_test
+[uvm_vivado_xsim] make compile (sv2v)...
+make: Entering directory '/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu'
+make compile_alu
+make[1]: Entering directory '/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu'
+sv2v -w build/alu.v src/alu.sv
+make[1]: Leaving directory '/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu'
+sv2v -I src/* -w build/gpu.v
+echo "" >> build/gpu.v
+cat build/alu.v >> build/gpu.v
+echo '`timescale 1ns/1ns' > build/temp.v
+cat build/gpu.v >> build/temp.v
+mv build/temp.v build/gpu.v
+make: Leaving directory '/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu'
+[uvm_vivado_xsim] xvlog DUT (Verilog)...
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" into library work
+INFO: [VRFC 10-311] analyzing module controller
+INFO: [VRFC 10-311] analyzing module core
+INFO: [VRFC 10-311] analyzing module dcr
+INFO: [VRFC 10-311] analyzing module decoder
+INFO: [VRFC 10-311] analyzing module dispatch
+INFO: [VRFC 10-311] analyzing module fetcher
+INFO: [VRFC 10-311] analyzing module gpu
+INFO: [VRFC 10-311] analyzing module lsu
+INFO: [VRFC 10-311] analyzing module pc
+INFO: [VRFC 10-311] analyzing module registers
+INFO: [VRFC 10-311] analyzing module scheduler
+INFO: [VRFC 10-311] analyzing module alu
+[uvm_vivado_xsim] xvlog testbench (SystemVerilog + UVM)...
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/clk_agent/clk_agent_if.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/rst_agent/rst_agent_if.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/done_agent/done_agent_if.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/memory_agent/memory_if.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_if.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/clk_agent/clk_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/rst_agent/rst_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/done_agent/done_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/agents/memory_agent/memory_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/env/gpu_env_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/sequences/gpu_seq_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/tests/gpu_test_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/top/gpu_tb_top.sv" into library work
+INFO: [VRFC 10-311] analyzing module gpu_tb_top
+[uvm_vivado_xsim] xelab top gpu_tb_top...
+Vivado Simulator v2025.1.0
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /home/daniel/Vivado/2025.1/Vivado/bin/unwrapped/lnx64.o/xelab -relax -L uvm work.gpu_tb_top -s sim_gpu_tb 
+Multi-threading is on. Using 14 slave threads.
+WARNING: [XSIM 43-3431] One or more environment variables have been detected which affect the operation of the C compiler. These are typically not set in standard installations and are not tested by AMD, however they may be appropriate for your system, so the flow will attempt to continue.  If errors occur, try running xelab with the "-mt off -v 1" switches to see more information from the C compiler. The following environment variables have been detected:
+    LIBRARY_PATH
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4468] File : /proj/primebuilds/9999.0_PRIME_0428_0031/installs/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/top/gpu_tb_top.sv" Line 3. Module gpu_tb_top has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 681. Module gpu_default has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 399. Module dcr has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 3. Module controller(DATA_BITS=8,NUM_CONSUMERS=8,NUM_CHANNELS=4) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 3. Module controller(NUM_CONSUMERS=2,WRITE_ENABLE=0) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 544. Module dispatch has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 149. Module core_default has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 627. Module fetcher has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 420. Module decoder has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1129. Module scheduler has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=1) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=2) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=3) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 149. Module core_default has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 627. Module fetcher has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 420. Module decoder has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1129. Module scheduler has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=1) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=2) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=3) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/uvm/top/gpu_tb_top.sv" Line 3. Module gpu_tb_top has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 681. Module gpu_default has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 399. Module dcr has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 3. Module controller(DATA_BITS=8,NUM_CONSUMERS=8,NUM_CHANNELS=4) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 3. Module controller(NUM_CONSUMERS=2,WRITE_ENABLE=0) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 544. Module dispatch has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 149. Module core_default has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 627. Module fetcher has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 420. Module decoder has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1129. Module scheduler has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=1) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=2) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=3) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 149. Module core_default has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 627. Module fetcher has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 420. Module decoder has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1129. Module scheduler has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=1) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=2) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1225. Module alu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 903. Module lsu has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 1052. Module registers(THREAD_ID=3) has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "/home/daniel/Ğ Ğ°Ğ±Ğ¾Ñ‡Ğ¸Ğ¹ ÑÑ‚Ğ¾Ğ»/tiny-gpu/build/gpu.v" Line 999. Module pc has a timescale but at least one module in design doesn't have timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package work.clk_pkg
+Compiling package work.rst_pkg
+Compiling package work.host_ctrl_pkg
+Compiling package work.memory_pkg
+Compiling package work.done_pkg
+Compiling package work.gpu_env_pkg
+Compiling package work.gpu_scoreboard_pkg
+Compiling package work.gpu_test_pkg
+Compiling package work.gpu_seq_pkg
+Compiling module work.clk_agent_if_default
+Compiling module work.rst_agent_if_default
+Compiling module work.cb
+Compiling module work.host_ctrl_if_default
+Compiling module work.cb
+Compiling module work.memory_if(DATA_BITS=16)
+Compiling module work.cb
+Compiling module work.memory_if(NUM_CHANNELS=4)
+Compiling module work.done_agent_if_default
+Compiling module work.dcr
+Compiling module work.controller(DATA_BITS=8,NUM_CONSU...
+Compiling module work.controller(NUM_CONSUMERS=2,WRITE...
+Compiling module work.dispatch
+Compiling module work.fetcher
+Compiling module work.decoder
+Compiling module work.scheduler
+Compiling module work.alu
+Compiling module work.lsu
+Compiling module work.registers
+Compiling module work.pc
+Compiling module work.registers(THREAD_ID=1)
+Compiling module work.registers(THREAD_ID=2)
+Compiling module work.registers(THREAD_ID=3)
+Compiling module work.core_default
+Compiling module work.gpu_default
+Compiling module work.gpu_tb_top
+Built simulation snapshot sim_gpu_tb
+[uvm_vivado_xsim] xsim (UVM_TESTNAME=gpu_stress_test)...
+
+****** xsim v2025.1 (64-bit)
+  **** SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
+  **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+  **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+  **** Start of session at: Sun May  3 11:01:42 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/sim_gpu_tb/xsim_script.tcl
+# xsim {sim_gpu_tb} -testplusarg UVM_TESTNAME=gpu_stress_test -testplusarg UVM_TIMEOUT=500000ns,YES -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+UVM_INFO /home/daniel/Vivado/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO /home/daniel/Vivado/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18648) @ 0: reporter [NO_DPI_TSTNAME] UVM_NO_DPI defined--getting UVM_TESTNAME directly, without DPI
+UVM_INFO @ 0: reporter [RNTST] Running test gpu_stress_test...
+UVM_INFO /home/daniel/Vivado/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/clk_agent/clk_driver.sv(25) @ 0: uvm_test_top.env.clk_ag.driver [CLK_DRV] Clock period changed to 10ns
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(22) @ 0: uvm_test_top.env.rst_ag.driver [RST_DRV] Asserting reset for 20ns
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(26) @ 20000: uvm_test_top.env.rst_ag.driver [RST_DRV] Reset deasserted
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(24) @ 20000: uvm_test_top [TEST] === ITERATION 0: Starting sequence with 7 threads ===
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_monitor.sv(29) @ 20000: uvm_test_top.env.rst_ag.monitor [RST_MON] Reset deasserted, duration=20ns
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(24) @ 20000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 13 program words
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 20000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x00
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 20000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x08
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(60) @ 35000: uvm_test_top.env.scoreboard [SCB] REF: thread_count = 7
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_monitor.sv(44) @ 46000: uvm_test_top.env.host_agent.monitor [HOST_MON] Start signal detected
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(65) @ 46000: uvm_test_top.env.scoreboard [SCB] REF: Kernel startÿÿÿâÿ” executing reference model
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(68) @ 46000: uvm_test_top.env.scoreboard [SCB] REF: Reference model computed 7 expected writes
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(59) @ 55000: uvm_test_top.env.v_seqr@@seq [VSEQ] Kernel launched with 7 threads
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(27) @ 55000: uvm_test_top [TEST] Waiting for GPU done signal...
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1565000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x10  data=0x0b (expected=0x0b)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1565000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x11  data=0x09 (expected=0x09)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1565000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x12  data=0x09 (expected=0x09)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1565000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x13  data=0x0a (expected=0x0a)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1635000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x14  data=0x13 (expected=0x13)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1635000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x15  data=0x16 (expected=0x16)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 1635000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x16  data=0x13 (expected=0x13)
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(29) @ 1815000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done asserted at 1815000
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(116) @ 1815000: uvm_test_top.env.scoreboard [SCB] Kernel done at 1815000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_driver.sv(25) @ 1825000: uvm_test_top.env.host_agent.driver [HOST_DRV] Start signal deasserted
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(55) @ 1825000: uvm_test_top [TEST] Sending ON-THE-FLY RESET
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(22) @ 1825000: uvm_test_top.env.rst_ag.driver [RST_DRV] Asserting reset for 20ns
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(32) @ 1835000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done deasserted at 1835000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(26) @ 1845000: uvm_test_top.env.rst_ag.driver [RST_DRV] Reset deasserted
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_monitor.sv(29) @ 1845000: uvm_test_top.env.rst_ag.monitor [RST_MON] Reset deasserted, duration=20ns
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(24) @ 1895000: uvm_test_top [TEST] === ITERATION 1: Starting sequence with 3 threads ===
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(24) @ 1895000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 13 program words
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 1895000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x00
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 1895000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x08
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(60) @ 1915000: uvm_test_top.env.scoreboard [SCB] REF: thread_count = 3
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_monitor.sv(44) @ 1926000: uvm_test_top.env.host_agent.monitor [HOST_MON] Start signal detected
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(65) @ 1926000: uvm_test_top.env.scoreboard [SCB] REF: Kernel startÿÿÿâÿ” executing reference model
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(68) @ 1926000: uvm_test_top.env.scoreboard [SCB] REF: Reference model computed 3 expected writes
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(59) @ 1935000: uvm_test_top.env.v_seqr@@seq [VSEQ] Kernel launched with 3 threads
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(27) @ 1935000: uvm_test_top [TEST] Waiting for GPU done signal...
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 3425000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x10  data=0x0a (expected=0x0a)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 3425000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x11  data=0x0b (expected=0x0b)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 3425000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x12  data=0x08 (expected=0x08)
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(29) @ 3605000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done asserted at 3605000
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(116) @ 3605000: uvm_test_top.env.scoreboard [SCB] Kernel done at 3605000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_driver.sv(25) @ 3615000: uvm_test_top.env.host_agent.driver [HOST_DRV] Start signal deasserted
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(55) @ 3615000: uvm_test_top [TEST] Sending ON-THE-FLY RESET
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(22) @ 3615000: uvm_test_top.env.rst_ag.driver [RST_DRV] Asserting reset for 20ns
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(32) @ 3625000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done deasserted at 3625000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(26) @ 3635000: uvm_test_top.env.rst_ag.driver [RST_DRV] Reset deasserted
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_monitor.sv(29) @ 3635000: uvm_test_top.env.rst_ag.monitor [RST_MON] Reset deasserted, duration=20ns
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(24) @ 3685000: uvm_test_top [TEST] === ITERATION 2: Starting sequence with 6 threads ===
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(24) @ 3685000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 13 program words
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 3685000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x00
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 3685000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x08
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(60) @ 3705000: uvm_test_top.env.scoreboard [SCB] REF: thread_count = 6
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_monitor.sv(44) @ 3716000: uvm_test_top.env.host_agent.monitor [HOST_MON] Start signal detected
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(65) @ 3716000: uvm_test_top.env.scoreboard [SCB] REF: Kernel startÿÿÿâÿ” executing reference model
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(68) @ 3716000: uvm_test_top.env.scoreboard [SCB] REF: Reference model computed 6 expected writes
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(59) @ 3725000: uvm_test_top.env.v_seqr@@seq [VSEQ] Kernel launched with 6 threads
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(27) @ 3725000: uvm_test_top [TEST] Waiting for GPU done signal...
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 5235000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x10  data=0x10 (expected=0x10)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 5235000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x11  data=0x0f (expected=0x0f)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 5235000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x12  data=0x11 (expected=0x11)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 5235000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x13  data=0x08 (expected=0x08)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 5305000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x14  data=0x13 (expected=0x13)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 5305000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x15  data=0x10 (expected=0x10)
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(29) @ 5485000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done asserted at 5485000
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(116) @ 5485000: uvm_test_top.env.scoreboard [SCB] Kernel done at 5485000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_driver.sv(25) @ 5495000: uvm_test_top.env.host_agent.driver [HOST_DRV] Start signal deasserted
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(55) @ 5495000: uvm_test_top [TEST] Sending ON-THE-FLY RESET
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(22) @ 5495000: uvm_test_top.env.rst_ag.driver [RST_DRV] Asserting reset for 20ns
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(32) @ 5505000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done deasserted at 5505000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(26) @ 5515000: uvm_test_top.env.rst_ag.driver [RST_DRV] Reset deasserted
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_monitor.sv(29) @ 5515000: uvm_test_top.env.rst_ag.monitor [RST_MON] Reset deasserted, duration=20ns
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(24) @ 5565000: uvm_test_top [TEST] === ITERATION 3: Starting sequence with 2 threads ===
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(24) @ 5565000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 13 program words
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 5565000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x00
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 5565000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x08
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(60) @ 5585000: uvm_test_top.env.scoreboard [SCB] REF: thread_count = 2
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_monitor.sv(44) @ 5596000: uvm_test_top.env.host_agent.monitor [HOST_MON] Start signal detected
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(65) @ 5596000: uvm_test_top.env.scoreboard [SCB] REF: Kernel startÿÿÿâÿ” executing reference model
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(68) @ 5596000: uvm_test_top.env.scoreboard [SCB] REF: Reference model computed 2 expected writes
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(59) @ 5605000: uvm_test_top.env.v_seqr@@seq [VSEQ] Kernel launched with 2 threads
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(27) @ 5605000: uvm_test_top [TEST] Waiting for GPU done signal...
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 7095000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x10  data=0x05 (expected=0x05)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 7095000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x11  data=0x0d (expected=0x0d)
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(29) @ 7275000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done asserted at 7275000
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(116) @ 7275000: uvm_test_top.env.scoreboard [SCB] Kernel done at 7275000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_driver.sv(25) @ 7285000: uvm_test_top.env.host_agent.driver [HOST_DRV] Start signal deasserted
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(55) @ 7285000: uvm_test_top [TEST] Sending ON-THE-FLY RESET
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(22) @ 7285000: uvm_test_top.env.rst_ag.driver [RST_DRV] Asserting reset for 20ns
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(32) @ 7295000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done deasserted at 7295000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(26) @ 7305000: uvm_test_top.env.rst_ag.driver [RST_DRV] Reset deasserted
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_monitor.sv(29) @ 7305000: uvm_test_top.env.rst_ag.monitor [RST_MON] Reset deasserted, duration=20ns
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(24) @ 7355000: uvm_test_top [TEST] === ITERATION 4: Starting sequence with 3 threads ===
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(24) @ 7355000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 13 program words
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 7355000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x00
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(39) @ 7355000: uvm_test_top.env.v_seqr@@seq [VSEQ] Loaded 8 data bytes at base 0x08
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(60) @ 7375000: uvm_test_top.env.scoreboard [SCB] REF: thread_count = 3
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_monitor.sv(44) @ 7386000: uvm_test_top.env.host_agent.monitor [HOST_MON] Start signal detected
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(65) @ 7386000: uvm_test_top.env.scoreboard [SCB] REF: Kernel startÿÿÿâÿ” executing reference model
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(68) @ 7386000: uvm_test_top.env.scoreboard [SCB] REF: Reference model computed 3 expected writes
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/sequences/gpu_base_vseq.sv(59) @ 7395000: uvm_test_top.env.v_seqr@@seq [VSEQ] Kernel launched with 3 threads
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(27) @ 7395000: uvm_test_top [TEST] Waiting for GPU done signal...
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 8885000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x10  data=0x12 (expected=0x12)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 8885000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x11  data=0x0b (expected=0x0b)
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(100) @ 8885000: uvm_test_top.env.scoreboard [SCB] MATCH  addr=0x12  data=0x0d (expected=0x0d)
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(29) @ 9065000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done asserted at 9065000
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(116) @ 9065000: uvm_test_top.env.scoreboard [SCB] Kernel done at 9065000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/host_ctrl_agent/host_ctrl_driver.sv(25) @ 9075000: uvm_test_top.env.host_agent.driver [HOST_DRV] Start signal deasserted
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(55) @ 9075000: uvm_test_top [TEST] Sending ON-THE-FLY RESET
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(22) @ 9075000: uvm_test_top.env.rst_ag.driver [RST_DRV] Asserting reset for 20ns
+UVM_INFO /home/danieÿÿÿ ÿÿÿ±ÿÿÿ‡ÿÿÿ¹ÿÿÿÑÿÿÿĞ»/tiny-gpu/uvm/agents/done_agent/done_monitor.sv(32) @ 9085000: uvm_test_top.env.done_ag.monitor [DONE_MON] GPU done deasserted at 9085000
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_driver.sv(26) @ 9095000: uvm_test_top.env.rst_ag.driver [RST_DRV] Reset deasserted
+UVM_INFO /home/daniel/ÿÿÿ°ÿÿÿ¾ÿÿÿ¸ÿÿÿÑÿÿÿĞÿÿ»/tiny-gpu/uvm/agents/rst_agent/rst_monitor.sv(29) @ 9095000: uvm_test_top.env.rst_ag.monitor [RST_MON] Reset deasserted, duration=20ns
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/tests/gpu_stress_test.sv(64) @ 9145000: uvm_test_top [TEST] Stress test finished successfully!
+UVM_INFO /home/daniel/Vivado/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(19968) @ 9145000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(185) @ 9145000: uvm_test_top.env.coverage_col [COV] ============================================
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(186) @ 9145000: uvm_test_top.env.coverage_col [COV]         COVERAGE SUMMARY
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(187) @ 9145000: uvm_test_top.env.coverage_col [COV] ============================================
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(188) @ 9145000: uvm_test_top.env.coverage_col [COV]   Kernel config  :   33.3%
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(189) @ 9145000: uvm_test_top.env.coverage_col [COV]   ISA opcodes    :   54.5%
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(190) @ 9145000: uvm_test_top.env.coverage_col [COV]   Data memory    :   53.8%
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(191) @ 9145000: uvm_test_top.env.coverage_col [COV]   Cross coverage :   83.3%
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(192) @ 9145000: uvm_test_top.env.coverage_col [COV] --------------------------------------------
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(193) @ 9145000: uvm_test_top.env.coverage_col [COV]   AVERAGE        :   56.2%
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(194) @ 9145000: uvm_test_top.env.coverage_col [COV]   Kernels run    : 5
+UVM_INFO /home/danielÿÿÿĞÿÿÿĞÿÿÿĞÿÿ¹ ÿÿÿ‚ÿÿÿ»/tiny-gpu/uvm/scoreboard/gpu_coverage.sv(195) @ 9145000: uvm_test_top.env.coverage_col [COV] ============================================
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(142) @ 9145000: uvm_test_top.env.scoreboard [SCB] ============================================
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(143) @ 9145000: uvm_test_top.env.scoreboard [SCB]         SCOREBOARD SUMMARY
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(144) @ 9145000: uvm_test_top.env.scoreboard [SCB] ============================================
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(145) @ 9145000: uvm_test_top.env.scoreboard [SCB]   Total DUT writes   : 0
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(147) @ 9145000: uvm_test_top.env.scoreboard [SCB]   Expected writes    : -1
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(148) @ 9145000: uvm_test_top.env.scoreboard [SCB]   Matches            : 0
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(149) @ 9145000: uvm_test_top.env.scoreboard [SCB]   Mismatches         : 0
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(150) @ 9145000: uvm_test_top.env.scoreboard [SCB]   Kernel completed   :  NO
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(151) @ 9145000: uvm_test_top.env.scoreboard [SCB]   Reference executed :  NO
+UVM_INFO /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(152) @ 9145000: uvm_test_top.env.scoreboard [SCB] ============================================
+UVM_WARNING /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(159) @ 9145000: uvm_test_top.env.scoreboard [SCB] No DUT writes observed to verify
+UVM_WARNING /home/daniÿÿÿĞÿÿÿĞÿÿÿÑÿÿÿĞÿÿÿÿÿÿ¾ÿ»/tiny-gpu/uvm/scoreboard/gpu_scoreboard.sv(162) @ 9145000: uvm_test_top.env.scoreboard [SCB] Kernel did NOT complete (done never asserted)
+UVM_INFO /home/daniel/Vivado/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(13673) @ 9145000: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  142
+UVM_WARNING :    2
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[CLK_DRV]     1
+[COV]    11
+[DONE_MON]    10
+[HOST_DRV]     5
+[HOST_MON]     5
+[NO_DPI_TSTNAME]     1
+[RNTST]     1
+[RST_DRV]    12
+[RST_MON]     6
+[SCB]    53
+[TEST]    16
+[TEST_DONE]     1
+[UVM/COMP/NAMECHECK]     1
+[UVM/RELNOTES]     1
+[VSEQ]    20
+
+$finish called at time : 9145 ns : File "/home/daniel/Vivado/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
+exit
+INFO: [Common 17-206] Exiting xsim at Sun May  3 11:01:44 2026...
+[uvm_vivado_xsim] done.

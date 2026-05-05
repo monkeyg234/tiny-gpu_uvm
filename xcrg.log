@@ -1,0 +1,7 @@
+
+ Options Set are : 
+
+   Command Line               : xcrg -cov_db_name sim_gpu_tb -cov_db_dir sim_build/vivado_uvm/xsim.codeCov/ -report_dir sim_build/vivado_uvm/cov_report -report_format text
+   Report Format              : text
+   Log File                   : xcrg.log
+

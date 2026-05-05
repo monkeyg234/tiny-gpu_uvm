@@ -9,4 +9,6 @@ package gpu_seq_pkg;
     `include "gpu_base_vseq.sv"
     `include "gpu_matadd_seq.sv"
     `include "gpu_stress_seq.sv"
+    `include "gpu_dual_done_seq.sv"
+    `include "gpu_arbiter_seq.sv"
 endpackage

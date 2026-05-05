@@ -10,7 +10,6 @@ class host_ctrl_driver extends uvm_driver #(host_ctrl_item);
     virtual task run_phase(uvm_phase phase);
         vif.cb.start <= 0;
         vif.cb.device_control_write_enable <= 0;
-
         forever begin
             seq_item_port.get_next_item(req);
             drive_item(req);
@@ -22,7 +21,6 @@ class host_ctrl_driver extends uvm_driver #(host_ctrl_item);
         @(vif.cb);
         if (item.is_start_clear) begin
             vif.cb.start <= 0;
-            `uvm_info("HOST_DRV", "Start signal deasserted", UVM_MEDIUM)
         end else if (item.is_write) begin
             vif.cb.device_control_data <= item.data;
             vif.cb.device_control_write_enable <= 1;
@@ -31,6 +29,7 @@ class host_ctrl_driver extends uvm_driver #(host_ctrl_item);
         end else begin
             vif.cb.start <= 1;
             @(vif.cb);
+            vif.cb.start <= 0;
         end
     endtask
 endclass
